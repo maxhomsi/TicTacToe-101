@@ -1,3 +1,9 @@
+let board = [
+  ['', '', ''],
+  ['', '', ''],
+  ['', '', '']
+]
+
 //       ***********************
 //            INSTRUCTIONS
 //       ***********************
@@ -8,9 +14,6 @@
 
 // The variable will change from X to O based on what player turn it is. We need to hold this so we can place an X or O on the board when they're clicked.
 let currentMarker = 'X'
-
-
-
 
 // this "handleClick" function is called when a box is clicked. Here, "element" will hold the same value as "this" does in the HTML. 
 // "this" is a special word in JS but "element" could have been "thing" or "el" or whatever we wanted it to be as long as we use it again in the "console.log" statement
@@ -23,14 +26,10 @@ const handleClick = (element) => {
   //  checking to see if the square clicked has anything in it, if not continue
 
 
-  if(!document.getElementById(element.id).innerHTML){
+   if(!document.getElementById(element.id).innerHTML){
     addMarker(element.id)
   }
 }
-
-
-
-
 
 // this function places the "currentMarker" inside the HTML element that was clicked and calls the "changeMarker" function.
 const addMarker = (id) => {
@@ -48,9 +47,12 @@ const addMarker = (id) => {
   // .innerHTML 
 
 
-document.getElementById(id).innerHTML = currentMarker
+  document.getElementById(id).innerHTML = currentMarker 
 
+  const row = parseInt(id.charAt(0))
+  const column = parseInt(id.charAt(2))
   
+  board[row][column] = currentMarker
 
   checkForWin()
 }
@@ -83,9 +85,9 @@ const horizontalWin = () => {
   || (board[0][0] == "O" && board[0][1] == "O" && board[0][2] == "O")
   || (board[1][0] == "O" && board[1][1] == "O" && board[1][2] == "O")
   || (board[2][0] == "O" && board[2][1] == "O" && board[2][2] == "O"));
-  {
+  
 return true;
-}
+
 
 }
 const verticalWin = () => {
@@ -96,20 +98,20 @@ const verticalWin = () => {
   || (board[0][0] == "O" && board[1][0] == "O" && board[2][0] == "O")
   || (board[0][0] == "O" && board[1][0] == "O" && board[2][0] == "O")
   || (board[0][0] == "O" && board[1][0] == "O" && board[2][0] == "O"));
-{
+
 return true;
 
-}}
+}
 const diagonalWin = () => {
   // Your code here to check for diagonal wins
   if((board[0][0] == "X" && board[1][1] == "X" && board[2][2] == "X")
   || (board[2][0] == "X" && board[1][1] == "X" && board[0][2] == "X")
   || (board[0][0] == "O" && board[1][1] == "O" && board[2][2] == "O")
   || (board[2][0] == "O" && board[1][1] == "O" && board[0][2] == "O"));
-{
+
 return true;
 
-}
+
 
 }
 
@@ -133,9 +135,10 @@ const resetBoard = () => {
   for (i=0; i < squares.length; i++) {
 
     // will log out the id of each square as it loops over them.
-    console.log(squares[i].id)
+    // console.log(squares[i].id)
 
     // sets the innerHTML to null to replace the "X" or "O"
     squares[i].innerHTML = null
+    window.location.reload()
   }  
 }
